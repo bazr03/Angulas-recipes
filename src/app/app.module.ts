@@ -1,16 +1,37 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
-import { AppComponent } from './app.component';
+import { AppRoutingModule } from "./app-rounting.module";
+import { AppComponent } from "./app.component";
+import { HeaderComponent } from "./header/header.component";
+import { ErrorPageComponent } from "./error-page/error-page.component";
+import { AuthComponent } from "./auth/auth.component";
+import { RecipesModule } from "./recipes/recipes.module";
+import { ShoppinListModule } from "./shopping-list/shopping-list.module";
+import { SharedModule } from "./shared/shared.module";
+import { CoreModule } from "./core.module";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    ErrorPageComponent,
+    AuthComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    RecipesModule,
+    ShoppinListModule,
+    SharedModule,
+    CoreModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

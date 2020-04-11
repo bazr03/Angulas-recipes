@@ -1,0 +1,8 @@
+.recipe-left h4,
+.recipe-left p {
+  margin: 0;
+  padding: 0;
+}
+.recipe-left h4 {
+  margin-bottom: 0.5rem;
+}
