@@ -26,12 +26,12 @@ const appRoutes: Routes = [
     path: "auth",
     loadChildren: () => import("./auth/auth.module").then((m) => m.AuthModule),
   },
-  // {
-  //   path: "not-found",
-  //   component: ErrorPageComponent,
-  //   data: { msg: "Page not Found!" },
-  // },
-  // { path: "**", redirectTo: "not-found" },
+  {
+    path: "not-found",
+    component: ErrorPageComponent,
+    data: { msg: "Page not Found!" },
+  },
+  { path: "**", redirectTo: "not-found" },
 ];
 
 @NgModule({
