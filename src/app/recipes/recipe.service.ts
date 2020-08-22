@@ -1,7 +1,9 @@
 import { Subject } from "rxjs";
+// import { Store } from '@ngrx/store';
 
 import { Recipe } from "./recipes.model";
-import { Ingredient } from "../shared/ingredient.model";
+// import { Ingredient } from "../shared/ingredient.model";
+
 
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
@@ -34,6 +36,8 @@ export class RecipeService {
 
   private recipes: Recipe[];
 
+
+
   setRecipes(recipes: Recipe[]) {
     this.recipes = recipes;
     this.recipesChanged.next(this.recipes.slice());
@@ -46,6 +50,8 @@ export class RecipeService {
     // return this.recipes.find(recipe => recipe.id === id);
     return this.recipes[index];
   }
+
+ 
 
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
