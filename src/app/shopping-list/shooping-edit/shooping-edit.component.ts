@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild, OnDestroy } from "@angular/core";
-
-import { Ingredient } from "../../shared/ingredient.model";
-import { ShoppingListService } from "../shopping-list.service";
 import { NgForm } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { Store } from "@ngrx/store";
+
+import { Ingredient } from "../../shared/ingredient.model";
+import { ShoppingListService } from "../shopping-list.service";
 import * as ShoppingListActions from "../store/shopping-list.actions";
+import * as fromShoppingList from '../store/shopping-list.reducer';
 
 @Component({
   selector: "app-shooping-edit",
@@ -21,7 +22,7 @@ export class ShoopingEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private shoppingListService: ShoppingListService,
-    private store: Store<{ shoppingList: { ingredients: Ingredient[] } }>
+    private store: Store<fromShoppingList.AppState>
   ) {}
 
   ngOnInit(): void {

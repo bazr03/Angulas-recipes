@@ -1,8 +1,10 @@
 import { Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { Injectable } from '@angular/core';
+
 import { Ingredient } from '../shared/ingredient.model';
 import * as ShopingListActions from './store/shopping-list.actions';
-import { Injectable } from '@angular/core';
+import * as fromShoppingList from './store/shopping-list.reducer';
 
 @Injectable()
 export class ShoppingListService {
@@ -13,7 +15,7 @@ export class ShoppingListService {
     new Ingredient('Apples', 5),
   ];
 
-  constructor(private store: Store<{ shoppingList: { ingredients: Ingredient[] } }>) {}
+  constructor(private store: Store<fromShoppingList.AppState>) {}
 
   getIngredients() {
     return this.ingredients.slice(); // regresa una copia, no una referencia
