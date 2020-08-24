@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { catchError, tap } from "rxjs/operators";
-import { Router } from "@angular/router";
-import { throwError, BehaviorSubject } from "rxjs";
-import { User } from "./user.model";
-import { environment } from "../../environments/environment";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { throwError, BehaviorSubject } from 'rxjs';
+import { User } from './user.model';
+import { environment } from '../../environments/environment';
 
 export interface AuthResponseData {
   idToken: string;
@@ -15,16 +15,17 @@ export interface AuthResponseData {
   registered?: boolean;
 }
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   user = new BehaviorSubject<User>(null);
   tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {}
+
   signup(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" +
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' +
           environment.firebaseApiKey,
         {
           email: email,
@@ -48,7 +49,7 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" +
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
           environment.firebaseApiKey,
         {
           email: email,
@@ -75,7 +76,7 @@ export class AuthService {
       id: string;
       _token: string;
       _tokenExpirationDate: string;
-    } = JSON.parse(localStorage.getItem("userData"));
+    } = JSON.parse(localStorage.getItem('userData'));
 
     if (!userData) {
       return;
@@ -101,8 +102,8 @@ export class AuthService {
 
   logout() {
     this.user.next(null);
-    this.router.navigate(["/auth"]);
-    localStorage.removeItem("userData");
+    this.router.navigate(['/auth']);
+    localStorage.removeItem('userData');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
     }
@@ -125,23 +126,23 @@ export class AuthService {
     const user = new User(email, userId, token, expitarionDate);
     this.user.next(user);
     this.autoLogout(expiresIn * 1000);
-    localStorage.setItem("userData", JSON.stringify(user));
+    localStorage.setItem('userData', JSON.stringify(user));
   }
 
   private handleError(errorRes: HttpErrorResponse) {
-    let errorMsg = "An unknown error occurred!";
+    let errorMsg = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.error) {
       return throwError(errorMsg);
     }
     switch (errorRes.error.error.message) {
-      case "EMAIL_EXISTS":
-        errorMsg = "This email already exists!";
+      case 'EMAIL_EXISTS':
+        errorMsg = 'This email already exists!';
         break;
-      case "EMAIL_NOT_FOUND":
-        errorMsg = "Email does not exist!";
+      case 'EMAIL_NOT_FOUND':
+        errorMsg = 'Email does not exist!';
         break;
-      case "INVALID_PASSWORD":
-        errorMsg = "Password is not correct!";
+      case 'INVALID_PASSWORD':
+        errorMsg = 'Password is not correct!';
         break;
     }
     return throwError(errorMsg);
